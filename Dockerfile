@@ -7,11 +7,15 @@ COPY app.js ./
 
 EXPOSE 7860
 
-# 确保 npm 运行时有权限，并修复 /app 目录权限
-RUN apk add --no-cache curl bash && \
-    npm ci --unsafe-perm && \
-    chmod -R 777 /app
+# 安装 `apk` 依赖，并检查是否成功
+RUN apk add --no-cache curl bash
 
-USER node  # 可尝试改回 root 以排查问题
+# 使用 `npm install`，如果失败则尝试 `--legacy-peer-deps`
+RUN npm install --unsafe-perm || npm install --legacy-peer-deps
+
+# 修复权限问题
+RUN chmod -R 777 /app
+
+USER node  # 如果仍然报错，可以改成 `USER root`
 
 CMD ["npm", "start"]
