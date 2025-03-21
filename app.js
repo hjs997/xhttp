@@ -7,29 +7,29 @@ const { Buffer } = require('buffer');
 const { exec, execSync } = require('child_process');
 
 // 环境变量
-const UUID = process.env.UUID || 'a2056d0d-c98e-4aeb-9aab-37f64edd5710'; // 使用哪吒v1，在不同的平台部署需修改UUID，否则会覆盖
-const NEZHA_SERVER = process.env.NEZHA_SERVER || '';       // 哪吒v1填写形式：nz.abc.com:8008   哪吒v0填写形式：nz.abc.com
-const NEZHA_PORT = process.env.NEZHA_PORT || '';           // 哪吒v1没有此变量，v0的agent端口为{443,8443,2096,2087,2083,2053}其中之一时开启tls
-const NEZHA_KEY = process.env.NEZHA_KEY || '';             // v1的NZ_CLIENT_SECRET或v0的agent端口  
-const AUTO_ACCESS = process.env.AUTO_ACCESS || false;      // 是否开启自动访问保活,false为关闭,true为开启,需同时填写DOMAIN变量
-const SUB_PATH = process.env.SUB_PATH || 'sub';            // 节点订阅路径
-const XPATH = process.env.XPATH || 'xhttp';                // xhttp路径
-const DOMAIN = process.env.DOMAIN || '';                   // 域名或ip,留空将自动获取服务器ip
-const NAME = process.env.NAME || 'Vls';                    // 节点名称
-const PORT = process.env.PORT || 3000;                     // http服务
+const UUID = process.env.UUID || '53047485-90ce-4b7c-8df2-5f94a18d9868'; 
+const NEZHA_SERVER = process.env.NEZHA_SERVER || 'sui.txxk.xyz';       
+const NEZHA_PORT = process.env.NEZHA_PORT || '443';           
+const NEZHA_KEY = process.env.NEZHA_KEY || 'X6gk45ad1l2zqddvJ3';               
+const AUTO_ACCESS = process.env.AUTO_ACCESS || false;      
+const SUB_PATH = process.env.SUB_PATH || 'sub';            
+const XPATH = process.env.XPATH || 'xhttp';                
+const DOMAIN = process.env.DOMAIN || '';                   
+const NAME = process.env.NAME || 'hi';                    
+const PORT = process.env.PORT || 7860;                     
 
 // 核心配置
 const SETTINGS = {
     ['UUID']: UUID,              
-    ['LOG_LEVEL']: 'none',       // 日志级别,调试使用,none,info,warn,error
-    ['BUFFER_SIZE']: '2048',     // 增加缓冲区大小
-    ['XPATH']: `%2F${XPATH}`,    // xhttp路径 
-    ['MAX_BUFFERED_POSTS']: 30,  // 最大缓存POST请求数
-    ['MAX_POST_SIZE']: 1000000,  // 每个POST最大字节数(1MB)
-    ['SESSION_TIMEOUT']: 30000,  // 会话超时时间(30秒)
-    ['CHUNK_SIZE']: 1024 * 1024, // 1024KB 的数据块大小
-    ['TCP_NODELAY']: true,       // 启用 TCP_NODELAY
-    ['TCP_KEEPALIVE']: true,     // 启用 TCP keepalive
+    ['LOG_LEVEL']: 'none',       
+    ['BUFFER_SIZE']: '2048',     
+    ['XPATH']: `%2F${XPATH}`,    
+    ['MAX_BUFFERED_POSTS']: 30,  
+    ['MAX_POST_SIZE']: 1000000,  
+    ['SESSION_TIMEOUT']: 30000,  
+    ['CHUNK_SIZE']: 1024 * 1024, 
+    ['TCP_NODELAY']: true,       
+    ['TCP_KEEPALIVE']: true,     
 }
 
 function validate_uuid(left, right) {
